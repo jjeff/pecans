@@ -50,6 +50,7 @@ export interface PecansSettings {
   timeout: number;
   basePath: string;
   cacheMaxAge: number;
+  preferUniversal: boolean;
 }
 
 export class UnsupportedPlatformError extends Error {
@@ -178,6 +179,8 @@ export class Pecans extends EventEmitter {
     cacheMaxAge: 60 * 60 * 2,
     // Secret for GitHub webhook
     basePath: "",
+    // prefer universal binaries when available (macOS only)
+    preferUniversal: true,
   };
 
   protected releasesCache: Record<string, Promise<PecansReleases>> = {};

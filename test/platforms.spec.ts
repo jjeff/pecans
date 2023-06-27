@@ -62,6 +62,22 @@ const release: PecansReleaseDTO = {
     },
     {
       id: "2",
+      type: "osx_universal",
+      filename: "test-3.3.1-darwin-universal.zip",
+      size: 1457531,
+      content_type: "application/zip",
+      raw: {},
+    },
+    {
+      id: "2",
+      type: "osx_universal",
+      filename: "test-3.3.1-darwin-universal.dmg",
+      size: 1457531,
+      content_type: "application/zip",
+      raw: {},
+    },
+    {
+      id: "2",
       type: "windows_32",
       filename: "atom-1.0.9-delta.nupkg",
       size: 1457531,
@@ -147,6 +163,27 @@ const tests: FilenameResolveTestTuple[] = [
   ["myapp.dmg", "osx", "64", undefined, platforms.OSX_64],
   ["myapp-arm.dmg", "osx", "arm64", undefined, platforms.OSX_ARM64],
   [
+    "myapp-v0.25.1-darwin-universal.zip",
+    "osx",
+    "universal",
+    undefined,
+    platforms.OSX_UNIVERSAL,
+  ],
+  [
+    "myapp-osx-univ.zip",
+    "osx",
+    "universal",
+    undefined,
+    platforms.OSX_UNIVERSAL,
+  ],
+  [
+    "myapp-universal.dmg",
+    "osx",
+    "universal",
+    undefined,
+    platforms.OSX_UNIVERSAL,
+  ],
+  [
     "myapp-v0.25.1-win32-ia32.zip",
     "windows",
     "32",
@@ -166,6 +203,9 @@ const tests: FilenameResolveTestTuple[] = [
 ];
 
 const fileNameByPlatformTests: [platform: Platform, filename: string][] = [
+  [platforms.OSX_UNIVERSAL, "myapp-v0.25.1-darwin-universal.zip"],
+  [platforms.OSX_UNIVERSAL, "myapp-osx-univ.zip"],
+  [platforms.OSX_UNIVERSAL, "myapp-universal.dmg"],
   ["osx_64", "test-3.3.1-darwin.dmg"],
   ["osx_arm64", "test-3.3.1-darwin-arm64.dmg"],
   ["windows_32", "AtomSetup.exe"],
