@@ -66,7 +66,7 @@ export class PecansRelease implements PecansReleaseDTO {
   satisfiesSemVerRange(range?: string) {
     if (range == undefined) return true;
     // latest isn't actually applicable to single entries.
-    // we ignore it here so prefiltering by other props will still work
+    // we ignore it here so pre-filtering by other props will still work
     // latest will need to be handled in a post filter.
     if (range == "latest") return true;
     if (!validRange(range)) {

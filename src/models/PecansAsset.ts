@@ -23,7 +23,7 @@ export interface PecansAssetDTO {
 
 export class PecansAsset implements PecansAssetDTO {
   os: OperatingSystem;
-  arch: Architecture;
+  arch: Architecture | null;
   pkg?: PackageFormat;
   id: string;
   filename: string;
