@@ -14,6 +14,10 @@ export interface PecansReleaseDTO {
   version: string;
 }
 
+export function isPecansAsset(obj: unknown): obj is PecansAsset {
+  return obj instanceof PecansAsset;
+}
+
 export class PecansRelease implements PecansReleaseDTO {
   assets: PecansAsset[];
   channel: string;
@@ -22,10 +26,19 @@ export class PecansRelease implements PecansReleaseDTO {
   version: string;
 
   constructor(dto: PecansReleaseDTO) {
-    this.assets = dto.assets.map((assetDTO) => {
-      const asset = new PecansAsset(assetDTO);
-      return asset;
-    });
+    this.assets = dto.assets
+      .map((assetDTO) => {
+        try {
+          const asset = new PecansAsset(assetDTO);
+          return asset;
+        } catch (err) {
+          console.error(
+            `Error parsing asset: ${assetDTO.filename} for release ${dto.version}/${dto.channel}`,
+            err
+          );
+        }
+      })
+      .filter<PecansAsset>(isPecansAsset);
     this.channel = channelFromVersion(dto.version);
     this.notes = dto.notes;
     this.published_at = dto.published_at;

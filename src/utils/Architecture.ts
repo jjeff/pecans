@@ -23,8 +23,9 @@ export function filenameToArchitecture(
     return "32";
   if (name.includes("64") || name.includes("x64") || name.includes("amd64"))
     return "64";
-  // TODO: test defaulting osx to universal and linux/win32 to 64
-  return os == "osx" ? "universal" : "64";
+  throw new Error(
+    `Unable to determine architecture from filename: ${filename}`
+  );
 }
 
 export function getSupportedArchByOs(os: OperatingSystem): Architecture[] {
